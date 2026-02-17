@@ -1,0 +1,1212 @@
+/* ================================================================
+   SABORES EXÓTICOS · Heladería Artesanal
+   Archivo: styles.css
+   Descripción: Todos los estilos del sistema integrado
+   Autores: Isaac Núñez · Nicolas Betancourt · Daniel Rojas
+   Año: 2026
+================================================================ */
+
+/* ----------------------------------------------------------------
+   1. VARIABLES GLOBALES (Design Tokens)
+---------------------------------------------------------------- */
+:root {
+  --bg:        #F6F1E9;   /* Fondo principal crema */
+  --bg2:       #EDE6D6;   /* Fondo secundario arena */
+  --white:     #FFFFFF;
+  --terra:     #C85F3C;   /* Terracota principal */
+  --terra2:    #A8462A;   /* Terracota oscura */
+  --gold:      #C9A227;   /* Dorado */
+  --green:     #4A7C59;   /* Verde selva */
+  --green2:    #355C41;   /* Verde oscuro */
+  --ink:       #1E1E1E;   /* Negro suave */
+  --ink2:      #3A3530;   /* Marrón oscuro */
+  --muted:     #8C7F70;   /* Texto secundario */
+  --border:    rgba(30, 30, 30, 0.1);
+  --shadow:    0 4px 24px rgba(30, 30, 30, 0.08);
+  --shadow-lg: 0 12px 48px rgba(30, 30, 30, 0.14);
+  --r:         4px;       /* Border radius base */
+}
+
+/* ----------------------------------------------------------------
+   2. RESET & BASE
+---------------------------------------------------------------- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ----------------------------------------------------------------
+   3. NAVEGACIÓN PRINCIPAL
+---------------------------------------------------------------- */
+.nav-tabs {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9000;
+  background: var(--ink);
+  display: flex;
+  align-items: stretch;
+  height: 52px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+  gap: .6rem;
+  color: var(--bg);
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.1rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  white-space: nowrap;
+}
+
+.nav-brand .dot {
+  width: 8px;
+  height: 8px;
+  background: var(--terra);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.nav-links {
+  display: flex;
+  align-items: stretch;
+  list-style: none;
+  flex: 1;
+}
+
+.nav-links li button {
+  height: 100%;
+  padding: 0 1.5rem;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.55);
+  font-family: 'DM Sans', sans-serif;
+  font-size: .85rem;
+  font-weight: 500;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: color .25s, border-color .25s;
+}
+
+.nav-links li button:hover,
+.nav-links li button.active {
+  color: var(--white);
+  border-bottom-color: var(--terra);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  background: var(--terra);
+  color: #fff;
+  font-size: .7rem;
+  font-weight: 700;
+  border-radius: 9px;
+  margin-left: .4rem;
+  vertical-align: middle;
+}
+
+/* ----------------------------------------------------------------
+   4. PÁGINAS (Sistema de pestañas)
+---------------------------------------------------------------- */
+.page {
+  display: none;
+  padding-top: 52px;
+  min-height: 100vh;
+}
+
+.page.active { display: block; }
+
+/* ----------------------------------------------------------------
+   5. PÁGINA CLIENTE — Hero
+---------------------------------------------------------------- */
+.hero {
+  background: var(--bg2);
+  padding: 4.5rem 2rem 3.5rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  right: -80px;
+  top: -80px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(201, 162, 39, .12) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero::before {
+  content: '🌿';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  font-size: 80px;
+  opacity: .06;
+  transform: translateX(-50%) rotate(-20deg);
+}
+
+.hero-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  line-height: 1;
+  letter-spacing: -.02em;
+  margin-bottom: .6rem;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--terra);
+}
+
+.hero-tagline {
+  font-size: 1rem;
+  color: var(--muted);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  font-weight: 300;
+}
+
+.hero-origins {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-top: 1.5rem;
+}
+
+.origin-chip {
+  padding: .3rem .9rem;
+  background: rgba(74, 124, 89, .12);
+  border: 1px solid rgba(74, 124, 89, .3);
+  color: var(--green2);
+  font-size: .8rem;
+  font-weight: 500;
+  border-radius: 99px;
+  letter-spacing: .03em;
+}
+
+.hero-card {
+  background: rgba(255, 255, 255, .55);
+  backdrop-filter: blur(12px);
+  padding: 2rem;
+  border-left: 4px solid var(--terra);
+}
+
+.hero-card h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.4rem;
+  color: var(--terra2);
+  margin-bottom: .5rem;
+}
+
+.hero-card p { color: var(--ink2); font-size: .95rem; }
+
+/* ----------------------------------------------------------------
+   6. PÁGINA CLIENTE — Layout principal
+---------------------------------------------------------------- */
+.client-main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.sec-header { margin-bottom: 2.5rem; }
+
+.sec-header h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.2rem;
+  margin-bottom: .5rem;
+}
+
+.sec-header-line {
+  display: block;
+  width: 64px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--terra), var(--gold));
+  margin-top: .8rem;
+  border-radius: 99px;
+}
+
+/* ----------------------------------------------------------------
+   7. TARJETAS DE PRODUCTOS
+---------------------------------------------------------------- */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.prod-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+  position: relative;
+  transition: transform .35s cubic-bezier(.4, 0, .2, 1), box-shadow .35s;
+  opacity: 0;
+  animation: cardIn .5s forwards;
+}
+
+.prod-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--terra), var(--gold));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .35s ease;
+}
+
+.prod-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+.prod-card:hover::before { transform: scaleX(1); }
+
+/* Animación escalonada */
+.prod-card:nth-child(1) { animation-delay: .05s; }
+.prod-card:nth-child(2) { animation-delay: .10s; }
+.prod-card:nth-child(3) { animation-delay: .15s; }
+.prod-card:nth-child(4) { animation-delay: .20s; }
+.prod-card:nth-child(5) { animation-delay: .25s; }
+.prod-card:nth-child(6) { animation-delay: .30s; }
+.prod-card:nth-child(7) { animation-delay: .35s; }
+.prod-card:nth-child(8) { animation-delay: .40s; }
+
+.prod-card-color-bar { height: 6px; width: 100%; }
+
+.prod-body { padding: 1.5rem; }
+
+.prod-region {
+  font-size: .72rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--green);
+  font-weight: 600;
+  margin-bottom: .4rem;
+}
+
+.prod-body h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.35rem;
+  margin-bottom: .5rem;
+  letter-spacing: -.01em;
+}
+
+.prod-desc {
+  font-size: .88rem;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: 1.2rem;
+}
+
+.prod-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.prod-price {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.6rem;
+  color: var(--terra2);
+}
+
+.prod-time {
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  background: var(--green);
+  color: #fff;
+  padding: .28rem .8rem;
+  border-radius: var(--r);
+}
+
+.add-btn {
+  width: 100%;
+  padding: .85rem;
+  background: var(--ink);
+  color: #fff;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .85rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: var(--r);
+  position: relative;
+  overflow: hidden;
+  transition: transform .25s;
+}
+
+.add-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--terra);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .35s ease;
+  z-index: 0;
+}
+
+.add-btn:hover::after { transform: scaleX(1); }
+.add-btn:hover { transform: translateY(-2px); }
+.add-btn span { position: relative; z-index: 1; }
+
+/* ----------------------------------------------------------------
+   8. SIDEBAR DEL PEDIDO
+---------------------------------------------------------------- */
+.order-sidebar {
+  position: sticky;
+  top: 68px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  border-radius: var(--r);
+  overflow: hidden;
+  animation: fadeSlide .6s .2s backwards;
+}
+
+.order-head {
+  padding: 1.5rem;
+  background: var(--ink);
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-head h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem;
+}
+
+.order-count {
+  background: var(--terra);
+  color: #fff;
+  font-size: .8rem;
+  font-weight: 700;
+  padding: .2rem .6rem;
+  border-radius: 99px;
+}
+
+.order-items {
+  padding: 1rem 1.5rem;
+  min-height: 160px;
+  max-height: 340px;
+  overflow-y: auto;
+}
+
+.order-items::-webkit-scrollbar { width: 4px; }
+.order-items::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 99px; }
+
+.o-item {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: .8rem;
+  align-items: center;
+  padding: .75rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.o-item:last-child { border-bottom: none; }
+
+.o-item-name { font-size: .9rem; font-weight: 600; }
+.o-item-qty  { font-size: .78rem; color: var(--muted); }
+.o-item-price { color: var(--terra2); font-weight: 600; font-size: .9rem; }
+
+.o-remove {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 1.1rem;
+  transition: color .2s, transform .2s;
+  padding: .2rem .4rem;
+  border-radius: var(--r);
+}
+
+.o-remove:hover { color: var(--terra); transform: scale(1.25); }
+
+.cart-empty {
+  text-align: center;
+  color: var(--muted);
+  font-style: italic;
+  padding: 2rem 1rem;
+  font-size: .9rem;
+}
+
+.order-summary {
+  padding: 1.5rem;
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+}
+
+.sum-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: .6rem;
+  font-size: .9rem;
+}
+
+.sum-row .lbl { color: var(--muted); }
+
+.sum-total {
+  margin-top: 1.2rem;
+  padding-top: 1.2rem;
+  border-top: 2px solid var(--ink);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.sum-total .lbl {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.15rem;
+}
+
+.sum-total .val {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.6rem;
+  color: var(--terra);
+}
+
+.checkout-btn {
+  width: 100%;
+  margin-top: 1.2rem;
+  padding: 1rem;
+  background: var(--terra);
+  color: #fff;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .9rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: var(--r);
+  transition: background .25s, transform .2s, box-shadow .25s;
+}
+
+.checkout-btn:hover:not(:disabled) {
+  background: var(--terra2);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(200, 95, 60, .35);
+}
+
+.checkout-btn:disabled {
+  background: var(--muted);
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+/* ----------------------------------------------------------------
+   9. MODAL TICKET DE TURNO
+---------------------------------------------------------------- */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 15, 10, .85);
+  backdrop-filter: blur(6px);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-overlay.open { display: flex; }
+
+.ticket-box {
+  background: var(--white);
+  width: 420px;
+  max-width: 95vw;
+  border-radius: var(--r);
+  overflow: hidden;
+  animation: popIn .45s cubic-bezier(.68, -.55, .27, 1.55);
+}
+
+.ticket-head {
+  background: var(--ink);
+  padding: 2rem;
+  text-align: center;
+  color: #fff;
+}
+
+.ticket-head h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.8rem;
+  margin-bottom: .3rem;
+}
+
+.ticket-head p { color: rgba(255, 255, 255, .6); font-size: .85rem; }
+
+.ticket-body {
+  padding: 2.5rem 2rem 2rem;
+  text-align: center;
+}
+
+.ticket-lbl {
+  font-size: .78rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: .4rem;
+}
+
+.ticket-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 5rem;
+  line-height: 1;
+  color: var(--terra);
+  margin-bottom: 2rem;
+}
+
+.ticket-rows {
+  display: grid;
+  gap: .8rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed var(--muted);
+  text-align: left;
+}
+
+.ticket-row { display: flex; justify-content: space-between; }
+.ticket-row .lbl { color: var(--muted); font-size: .9rem; }
+.ticket-row .val { font-weight: 600; }
+
+.ticket-close {
+  width: 100%;
+  margin-top: 2rem;
+  padding: 1rem;
+  background: var(--green);
+  color: #fff;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .9rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: var(--r);
+  transition: background .25s;
+}
+
+.ticket-close:hover { background: var(--green2); }
+
+/* ----------------------------------------------------------------
+   10. PÁGINA COCINA
+---------------------------------------------------------------- */
+.kitchen-page {
+  background: #111;
+  color: #fff;
+  min-height: 100vh;
+}
+
+.kitchen-bar {
+  background: #1a1a1a;
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+  padding: 1.2rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kitchen-bar h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.6rem;
+  color: #fff;
+}
+
+.kitchen-stats { display: flex; gap: 1.5rem; }
+
+.k-stat { text-align: center; }
+
+.k-stat-val {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--gold);
+}
+
+.k-stat-lbl {
+  font-size: .72rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .5);
+}
+
+.kitchen-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.kitchen-col-header {
+  font-size: .75rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: .8rem 1rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  border-radius: var(--r);
+}
+
+.kitchen-col-header.pending  { background: rgba(201, 162, 39, .15); color: var(--gold); }
+.kitchen-col-header.progress { background: rgba(200,  95, 60, .15); color: var(--terra); }
+.kitchen-col-header.done     { background: rgba( 74, 124, 89, .15); color: #6dbf8c; }
+
+.kitchen-col { display: flex; flex-direction: column; gap: .8rem; }
+
+.k-order-card {
+  background: #1e1e1e;
+  border: 1px solid rgba(255, 255, 255, .07);
+  border-radius: var(--r);
+  padding: 1.2rem;
+  transition: border-color .25s;
+}
+
+.k-order-card:hover { border-color: rgba(255, 255, 255, .2); }
+
+.k-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: .8rem;
+}
+
+.k-turn {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem;
+  color: var(--gold);
+}
+
+.k-elapsed {
+  font-size: .78rem;
+  color: rgba(255, 255, 255, .4);
+  background: rgba(255, 255, 255, .06);
+  padding: .25rem .6rem;
+  border-radius: 99px;
+}
+
+.k-items { margin-bottom: 1rem; }
+
+.k-item-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: .85rem;
+  color: rgba(255, 255, 255, .75);
+  padding: .2rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, .04);
+}
+
+.k-item-row:last-child { border-bottom: none; }
+
+.k-actions { display: flex; gap: .5rem; }
+
+.k-btn {
+  flex: 1;
+  padding: .55rem;
+  border: none;
+  border-radius: var(--r);
+  font-family: 'DM Sans', sans-serif;
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity .2s, transform .2s;
+}
+
+.k-btn:hover { opacity: .85; transform: translateY(-1px); }
+.k-btn-start { background: var(--terra); color: #fff; }
+.k-btn-done  { background: var(--green); color: #fff; }
+.k-btn-del   { background: rgba(255, 255, 255, .08); color: rgba(255, 255, 255, .6); }
+
+.k-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: rgba(255, 255, 255, .25);
+  font-style: italic;
+  font-size: .9rem;
+  border: 1px dashed rgba(255, 255, 255, .08);
+  border-radius: var(--r);
+}
+
+/* ----------------------------------------------------------------
+   11. ERP / POS — Layout
+---------------------------------------------------------------- */
+.erp-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  min-height: calc(100vh - 52px);
+}
+
+.erp-sidebar {
+  background: var(--ink);
+  padding: 1.5rem 0;
+}
+
+.erp-sidebar-nav { list-style: none; }
+
+.erp-sidebar-nav li button {
+  width: 100%;
+  padding: .9rem 1.5rem;
+  background: transparent;
+  border: none;
+  border-left: 3px solid transparent;
+  color: rgba(255, 255, 255, .5);
+  font-family: 'DM Sans', sans-serif;
+  font-size: .85rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: color .2s, background .2s, border-color .2s;
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+}
+
+.erp-sidebar-nav li button:hover,
+.erp-sidebar-nav li button.active {
+  color: #fff;
+  background: rgba(255, 255, 255, .05);
+  border-left-color: var(--terra);
+}
+
+.erp-sidebar-nav li button .ico { font-size: 1rem; }
+
+.erp-sidebar-section {
+  padding: .4rem 1.5rem;
+  margin-top: 1rem;
+  font-size: .7rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .2);
+}
+
+.erp-content {
+  background: var(--bg);
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.erp-panel { display: none; }
+.erp-panel.active { display: block; }
+
+.erp-panel-header { margin-bottom: 2rem; }
+
+.erp-panel-header h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.8rem;
+  margin-bottom: .3rem;
+}
+
+.erp-panel-header p { color: var(--muted); font-size: .9rem; }
+
+/* ----------------------------------------------------------------
+   12. ERP — KPI Cards
+---------------------------------------------------------------- */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  margin-bottom: 2.5rem;
+}
+
+.kpi-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+}
+
+.kpi-card.k1::before { background: var(--terra); }
+.kpi-card.k2::before { background: var(--gold); }
+.kpi-card.k3::before { background: var(--green); }
+.kpi-card.k4::before { background: #7a6bde; }
+
+.kpi-lbl {
+  font-size: .78rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: .5rem;
+}
+
+.kpi-val {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.kpi-sub { font-size: .78rem; color: var(--muted); margin-top: .4rem; }
+
+.kpi-icon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2.5rem;
+  opacity: .07;
+}
+
+/* ----------------------------------------------------------------
+   13. ERP — Tablas
+---------------------------------------------------------------- */
+.erp-table-wrap {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.erp-table-head {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.erp-table-head h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.2rem;
+}
+
+.erp-table-head .actions { display: flex; gap: .6rem; }
+
+table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+
+thead th {
+  background: var(--bg2);
+  padding: .75rem 1.2rem;
+  text-align: left;
+  font-size: .75rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+tbody td {
+  padding: .9rem 1.2rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: rgba(30, 30, 30, .02); }
+
+/* Pills de estado */
+.pill {
+  display: inline-block;
+  padding: .22rem .7rem;
+  border-radius: 99px;
+  font-size: .75rem;
+  font-weight: 600;
+}
+
+.pill-green  { background: rgba( 74, 124, 89, .12); color: var(--green2); }
+.pill-yellow { background: rgba(201, 162, 39, .12); color: #8c6e00; }
+.pill-red    { background: rgba(200,  95, 60, .12); color: var(--terra2); }
+.pill-gray   { background: rgba(140, 127, 112, .12); color: var(--muted); }
+
+/* ----------------------------------------------------------------
+   14. ERP — Gráfico de barras (puro CSS)
+---------------------------------------------------------------- */
+.bar-chart {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.bar-chart h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.bars {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: .5rem;
+  align-items: end;
+  height: 160px;
+}
+
+.bar-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .4rem;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.bar-fill {
+  width: 100%;
+  border-radius: 3px 3px 0 0;
+  background: linear-gradient(180deg, var(--terra), var(--terra2));
+  transition: height .8s cubic-bezier(.4, 0, .2, 1);
+  min-height: 4px;
+}
+
+.bar-lbl { font-size: .7rem; color: var(--muted); text-align: center; white-space: nowrap; }
+.bar-val  { font-size: .72rem; font-weight: 600; color: var(--terra2); }
+
+/* ----------------------------------------------------------------
+   15. ERP — Botones
+---------------------------------------------------------------- */
+.erp-btn {
+  padding: .5rem 1rem;
+  border-radius: var(--r);
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity .2s, transform .2s;
+}
+
+.erp-btn:hover { opacity: .85; transform: translateY(-1px); }
+
+.erp-btn-primary { background: var(--ink);   color: #fff; }
+.erp-btn-terra   { background: var(--terra); color: #fff; }
+.erp-btn-green   { background: var(--green); color: #fff; }
+.erp-btn-cancel  { background: var(--bg2); color: var(--ink); border: 1px solid var(--border); }
+.erp-btn-sm      { padding: .35rem .7rem; font-size: .75rem; }
+
+/* ----------------------------------------------------------------
+   16. ERP — Modal
+---------------------------------------------------------------- */
+.erp-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 15, 10, .7);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+}
+
+.erp-modal-overlay.open { display: flex; }
+
+.erp-modal {
+  background: var(--white);
+  width: 520px;
+  max-width: 95vw;
+  border-radius: var(--r);
+  overflow: hidden;
+  animation: popIn .3s ease;
+}
+
+.erp-modal-head {
+  background: var(--ink);
+  color: #fff;
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.erp-modal-head h3 { font-family: 'DM Serif Display', serif; font-size: 1.3rem; }
+
+.erp-modal-close {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, .6);
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: color .2s;
+}
+
+.erp-modal-close:hover { color: #fff; }
+
+.erp-modal-body { padding: 1.5rem; }
+
+.form-group { margin-bottom: 1.2rem; }
+
+.form-group label {
+  display: block;
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: .4rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: .7rem 1rem;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  font-family: 'DM Sans', sans-serif;
+  font-size: .9rem;
+  color: var(--ink);
+  border-radius: var(--r);
+  outline: none;
+  transition: border-color .2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus { border-color: var(--terra); }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+.erp-modal-foot {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-end;
+  gap: .7rem;
+}
+
+/* ----------------------------------------------------------------
+   17. ALERTA / TOAST
+---------------------------------------------------------------- */
+.alert-banner {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background: var(--ink);
+  color: #fff;
+  padding: 1rem 1.5rem;
+  border-radius: var(--r);
+  font-size: .9rem;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  box-shadow: var(--shadow-lg);
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all .35s cubic-bezier(.4, 0, .2, 1);
+}
+
+.alert-banner.show { transform: translateY(0); opacity: 1; }
+.alert-banner .ico { font-size: 1.2rem; }
+
+/* ----------------------------------------------------------------
+   18. FOOTER
+---------------------------------------------------------------- */
+footer {
+  background: var(--ink);
+  color: rgba(255, 255, 255, .5);
+  text-align: center;
+  padding: 2.5rem 2rem;
+}
+
+footer p { margin: .3rem 0; font-size: .85rem; }
+footer p:first-child { color: rgba(255, 255, 255, .8); font-weight: 500; }
+
+/* ----------------------------------------------------------------
+   19. ANIMACIONES GLOBALES
+---------------------------------------------------------------- */
+@keyframes pulse {
+  0%, 100% { transform: scale(1);   opacity: 1; }
+  50%       { transform: scale(1.5); opacity: .6; }
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateX(20px); }
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(.8) rotate(-4deg); }
+  to   { opacity: 1; transform: scale(1)  rotate(0deg); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: .3; }
+}
+
+/* ----------------------------------------------------------------
+   20. RESPONSIVE
+---------------------------------------------------------------- */
+@media (max-width: 1100px) {
+  .client-main    { grid-template-columns: 1fr; }
+  .kpi-grid       { grid-template-columns: repeat(2, 1fr); }
+  .kitchen-grid   { grid-template-columns: repeat(2, 1fr); }
+  .erp-layout     { grid-template-columns: 1fr; }
+  .erp-sidebar    { display: none; }
+  .order-sidebar  { position: relative; top: 0; }
+}
+
+@media (max-width: 700px) {
+  .hero-inner    { grid-template-columns: 1fr; }
+  .products-grid { grid-template-columns: 1fr; }
+  .kpi-grid      { grid-template-columns: 1fr; }
+  .kitchen-grid  { grid-template-columns: 1fr; }
+  .bars          { grid-template-columns: repeat(4, 1fr); }
+}
