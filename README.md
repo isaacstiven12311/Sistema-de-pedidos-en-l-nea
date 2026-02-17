@@ -82,15 +82,6 @@ Documentación completa de los requisitos del sistema, que incluye:
 | Base de datos | PostgreSQL / MySQL |
 | Control de versiones | Git / GitHub |
 
----
 
-## Cómo contribuir
 
-1. Clonar el repositorio: `git clone <url-del-repositorio>`
-2. Crear una rama para los cambios: `git checkout -b nombre-de-la-rama`
-3. Registrar los cambios: `git commit -m "descripción clara del cambio"`
-4. Subir la rama: `git push origin nombre-de-la-rama`
-
----
-
-*Proyecto desarrollado con fines académicos — Ingeniería de Sistemas*
+*Proyecto desarrollado con fines académicos — Ingeniería de Software*
