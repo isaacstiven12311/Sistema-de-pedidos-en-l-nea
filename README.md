@@ -255,4 +255,4 @@ Proyecto academico - Ingenieria de Software, 2026.
 
 ---
 
-Helados Biodiversos - De la biodiversidad colombiana a tu paladar.
+
