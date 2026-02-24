@@ -599,18 +599,33 @@ La idea de fondo es que un error detectado en el pipeline tarda minutos en corre
 
 
 
-### 6.6 Metricas de Calidad
+### 6.6 Métricas de Calidad
 
-| Metrica | Objetivo | Requisito relacionado |
-|---------|----------|-----------------------|
-| Cobertura de codigo | >= 80% | RNF-18 |
-| Tiempo de pruebas unitarias | < 30 segundos | Feedback rapido al equipo |
-| Tiempo de pruebas de integracion | < 3 minutos | Balance entre completitud y velocidad |
-| Errores de linting | 0 | RNF-18 (codigo consistente) |
-| Vulnerabilidades criticas | 0 | RNF-15, RNF-17 |
+Las métricas de calidad son indicadores que el pipeline mide automáticamente para decidir si el código está en condiciones de desplegarse.
+
+| Métrica | Objetivo | Justificación |
+|---------|----------|---------------|
+| Cobertura de código | >= 80% | RNF-18 |
+| Tiempo de pruebas unitarias | < 30 segundos | Feedback rápido al equipo |
+| Tiempo de pruebas de integración | < 3 minutos | Balance entre completitud y velocidad |
+| Errores de linting | 0 | RNF-18 (código consistente) |
+| Vulnerabilidades críticas | 0 | RNF-15, RNF-17 |
 | Tiempo de respuesta de la API | < 2 segundos | RNF-05 |
-| Uptime en produccion | >= 99% | RNF-09 |
+| Uptime en producción | >= 99% | RNF-09 |
 
+**Cobertura de código >= 80%** mide qué porcentaje del código fue ejecutado durante las pruebas. Si solo se cubre el 40%, hay más de la mitad del sistema sin verificar, y los bugs en esa parte solo aparecen cuando un usuario los encuentra en producción.
+
+**Tiempo de pruebas unitarias < 30 segundos** no mide calidad del código sino velocidad de respuesta. Si tardan 10 minutos, los desarrolladores dejan de ejecutarlas antes de hacer commit porque interrumpen el flujo de trabajo.
+
+**Tiempo de pruebas de integración < 3 minutos** aplica la misma lógica pero con umbral más generoso, porque estas pruebas levantan un servidor y conectan una base de datos, lo que las hace inherentemente más lentas.
+
+**Errores de linting = 0** significa que el código pasa ESLint sin ninguna advertencia. El linting no verifica que el programa funcione, sino que esté escrito de forma consistente: sin variables sin usar, sin código muerto, sin imports innecesarios. Cero tolerancia porque un error ignorado abre la puerta a ignorar todos los demás.
+
+**Vulnerabilidades críticas = 0** viene de `npm audit`, que revisa las dependencias buscando librerías con fallas de seguridad conocidas. Es especialmente importante porque el sistema maneja datos personales de clientes y debe cumplir la Ley 1581 de protección de datos (RNF-17).
+
+**Tiempo de respuesta de la API < 2 segundos** es el límite que define si el sistema se siente ágil o lento. Viene del RNF-05 y es crítico porque el problema central que el sistema resuelve son precisamente los tiempos de espera.
+
+**Uptime >= 99%** se mide en producción con herramientas de monitoreo. Equivale a no más de 7 horas de caída al año. Más tiempo caído significa pedidos perdidos y clientes que vuelven a hacer fila, lo que contradice directamente el propósito del sistema (RNF-09).
 ---
 
 ## 7. Decisiones Tecnicas
