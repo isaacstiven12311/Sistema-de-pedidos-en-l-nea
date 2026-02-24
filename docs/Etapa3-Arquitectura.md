@@ -575,7 +575,29 @@ Build del proyecto
 Deploy automatico (si todo paso)
 ```
 
-La cobertura minima del 80% no es arbitraria: garantiza que la mayoria del codigo esta probado, detecta codigo muerto y facilita el mantenimiento a largo plazo (RNF-18).
+El pipeline es una cadena de pasos automáticos que se disparan cada vez que alguien sube código a GitHub. El objetivo es simple: que ningún código roto llegue a producción sin que nadie se dé cuenta.
+
+Commit → Push es el punto de partida. El desarrollador sube su cambio y eso activa todo lo demás automáticamente.
+
+GitHub Actions es el motor. Hay un archivo de configuración en el repositorio que le dice a GitHub qué hacer cada vez que llega un push. Crea un servidor temporal y ejecuta los pasos en orden.
+
+Instalar dependencias ese servidor parte desde cero, así que primero necesita hacer npm install antes de poder ejecutar cualquier cosa.
+
+ESLint revisa el código sin ejecutarlo, buscando errores de sintaxis, variables sin usar o violaciones a las reglas del equipo. Si encuentra algo, el pipeline para aquí.
+
+Pruebas unitarias ejecuta los tests de services.test.js. Si alguno falla, el pipeline para y notifica al equipo.
+
+Pruebas de integración hace lo mismo pero con los endpoints completos de la API, verificando que controlador, servicio y modelo funcionen juntos.
+
+Cobertura >= 80% mide qué porcentaje del código fue ejecutado durante las pruebas. Si está por debajo del umbral, el pipeline falla aunque todas las pruebas hayan pasado.
+
+Si algo falla en cualquier paso: el pipeline se detiene, marca el commit con error en GitHub y bloquea el merge. Nadie puede fusionar código roto.
+
+Build y Deploy solo ocurren si todo lo anterior pasó. El código se empaqueta y se sube automáticamente al servidor sin intervención manual.
+
+La idea de fondo es que un error detectado en el pipeline tarda minutos en corregirse. El mismo error detectado en producción puede significar tiempo caído y clientes afectados.
+
+
 
 ### 6.6 Metricas de Calidad
 
@@ -597,11 +619,11 @@ La cobertura minima del 80% no es arbitraria: garantiza que la mayoria del codig
 
 **Backend Framework (por definir):**
 
-Node.js con Express es la opcion recomendada porque mantiene JavaScript en todo el stack, lo que reduce la curva de aprendizaje del equipo y facilita compartir logica de validaciones entre frontend y backend. Python con Flask o FastAPI es una alternativa valida si el equipo tiene mayor experiencia con ese lenguaje.
+Node.js es la opcion recomendada porque mantiene JavaScript en todo el stack, lo que reduce la curva de aprendizaje del equipo y facilita compartir logica de validaciones entre frontend y backend. Python con Flask o FastAPI es una alternativa valida si el equipo tiene mayor experiencia con ese lenguaje.
 
 **Base de datos (por definir):**
 
-PostgreSQL es la opcion recomendada por su robustez, soporte nativo para JSON y compatibilidad con los requisitos de integridad referencial del sistema. MySQL es una alternativa mas simple de configurar, aunque con menos funcionalidades avanzadas.
+MySQL es la opcion pensada o tambien SQL server, soporte nativo para JSON y compatibilidad con los requisitos de integridad referencial del sistema. 
 
 **Autenticacion:**
 
@@ -609,18 +631,15 @@ JWT (JSON Web Tokens) es la opcion recomendada por ser stateless, lo que facilit
 
 ### 7.2 Opciones de Despliegue
 
-Para la etapa inicial del negocio se recomienda Railway o Render por simplicidad de configuracion y plan gratuito disponible (RNF-39). A medida que el negocio crezca y requiera mayor control, se puede migrar a un VPS (DigitalOcean, Linode) sin cambiar la arquitectura del sistema.
-
+Para la etapa inicial del negocio se recomienda Railway o Render por simplicidad de configuracion y plan gratuito disponible (RNF-39).
 ---
 
 ## 8. Conclusion
 
 La arquitectura documentada en esta etapa establece las bases para un backend que cumple todos los requisitos funcionales y no funcionales definidos en la Etapa 2. Cada decision de diseno responde a necesidades concretas del negocio: la separacion en capas habilita pruebas automaticas, los contratos de API permiten trabajo en paralelo, y el pipeline de CI/CD protege la calidad del sistema en cada iteracion.
 
-Los proximos pasos son: definir el stack tecnologico especifico, crear la estructura de carpetas del repositorio, implementar el primer endpoint con su prueba unitaria correspondiente, y configurar el pipeline de CI/CD desde el inicio del desarrollo.
-
 ---
 
 **Autores:** Isaac Nunez, Nicolas Betancourt, Daniel Rojas
 **Proyecto:** Sistema de Pedidos en Linea - Helados Biodiversos
-**Fecha:** Febrero 2026
+**Fecha:** 24 Febrero 2026
