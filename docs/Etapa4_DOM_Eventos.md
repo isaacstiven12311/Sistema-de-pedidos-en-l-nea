@@ -115,8 +115,8 @@ Esto le dice a Vercel que el proyecto es estático y que sirva los archivos dire
 | Reemplazar onclick inline por data attributes con event delegation | Isaac |
 | Implementar localStorage para carrito y pedidos | Isaac |
 | Agregar manejo de errores en servicios críticos | Nicolás |
-| Verificar que los 33 tests pasan con npm test | Daniel |
-| Confirmar que el sitio abre con Live Server antes de subir | Isaac |
+| Verificar que los  tests pasan con npm test | Daniel |
+| Confirmar que el sitio abre con Live Server antes de subir | Nicolás |
 
 
 *Etapa 4 — Helados Biodiversos · Isaac Núñez, Nicolás Betancourt, Daniel Rojas*
