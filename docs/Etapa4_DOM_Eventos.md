@@ -97,10 +97,13 @@ Esto le dice a Vercel que el proyecto es estático y que sirva los archivos dire
 
 `localStorage` vive en el navegador del cliente, no en el servidor. Vercel solo sirve los archivos. Los datos del localStorage de un cliente en su teléfono no llegan al panel de cocina en otro dispositivo hasta que pasen por el backend. En la Fase 1 esto es aceptable porque todos los módulos corren en la misma sesión del navegador.
 
+bre con Live Server antes de subir | Isaac |
+
+---
+
 ### Lista de verificación antes del primer despliegue
 
 | Tarea | Responsable |
-
 |---|---|
 | Crear `vercel.json` con configuración estática | Daniel |
 | Reemplazar `onclick` inline por `data-*` con event delegation | Isaac |
@@ -108,8 +111,6 @@ Esto le dice a Vercel que el proyecto es estático y que sirva los archivos dire
 | Agregar manejo de errores en servicios críticos | Nicolás |
 | Verificar que los 33 tests pasan con `npm test` | Daniel |
 | Confirmar que el sitio abre con Live Server antes de subir | Isaac |
-
----
 
 
 *Etapa 4 — Helados Biodiversos · Isaac Núñez, Nicolás Betancourt, Daniel Rojas*
