@@ -95,13 +95,6 @@ El repositorio tiene un `package.json` con Jest. Para que Vercel no lo trate com
 
 Esto le dice a Vercel que el proyecto es estático y que sirva los archivos directamente sin ejecutar ningún proceso de Node.js.
 
-### Flujo de despliegue continuo con GitHub
-
-1. El equipo trabaja en ramas de feature.
-2. Se abre un Pull Request hacia `main`.
-3. GitHub Actions ejecuta los  tests de Jest.
-4. Si los tests pasan, se fusiona el PR.
-5. Vercel despliega automáticamente en menos de un minuto.
 
 ### localStorage en Vercel
 
