@@ -100,13 +100,14 @@ Esto le dice a Vercel que el proyecto es estático y que sirva los archivos dire
 ### Lista de verificación antes del primer despliegue
 
 | Tarea | Responsable |
+
 |---|---|
 | Crear `vercel.json` con configuración estática | Daniel |
 | Reemplazar `onclick` inline por `data-*` con event delegation | Isaac |
 | Implementar `localStorage` para carrito y pedidos | Isaac |
 | Agregar manejo de errores en servicios críticos | Nicolás |
-| Verificar que los  tests pasan con `npm test` | Daniel |
-| Confirmar que el sitio abre con Live Server antes de subir |  Nicolás  |
+| Verificar que los 33 tests pasan con `npm test` | Daniel |
+| Confirmar que el sitio abre con Live Server antes de subir | Isaac |
 
 ---
 
