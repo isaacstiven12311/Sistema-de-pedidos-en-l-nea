@@ -89,27 +89,33 @@ Cuando conectemos el backend en la Fase 2, localStorage actuará como caché: es
 
 Vercel detecta automáticamente proyectos de frontend estático, genera una URL pública con HTTPS desde el primer despliegue, y se integra directamente con GitHub para desplegar en cada `git push` a `main`.
 
-```
+### Configuración necesaria
+
+El repositorio tiene un `package.json` con Jest. Para que Vercel no lo trate como una app Node.js, se agrega un archivo `vercel.json` en la raíz del proyecto.
 
 Esto le dice a Vercel que el proyecto es estático y que sirva los archivos directamente sin ejecutar ningún proceso de Node.js.
 
+### Flujo de despliegue continuo con GitHub
 
+1. El equipo trabaja en ramas de feature.
+2. Se abre un Pull Request hacia `main`.
+3. GitHub Actions ejecuta los  tests de Jest.
+4. Si los tests pasan, se fusiona el PR.
+5. Vercel despliega automáticamente en menos de un minuto.
 
-`localStorage` vive en el navegador del cliente, no en el servidor. Vercel solo sirve los archivos. Los datos del localStorage de un cliente en su teléfono no llegan al panel de cocina en otro dispositivo hasta que pasen por el backend. En la Fase 1 esto es aceptable porque todos los módulos corren en la misma sesión del navegador.
+### localStorage en Vercel
 
-bre con Live Server antes de subir | Isaac |
-
----
+`localStorage` vive en el navegador del cliente, no en el servidor. Vercel solo sirve los archivos. Los datos del localStorage de un cliente en su teléfono no llegan al panel de cocina en otro dispositivo hasta que pasen por el backend.
 
 ### Lista de verificación antes del primer despliegue
 
 | Tarea | Responsable |
 |---|---|
-| Crear `vercel.json` con configuración estática | Daniel |
-| Reemplazar `onclick` inline por `data-*` con event delegation | Isaac |
-| Implementar `localStorage` para carrito y pedidos | Isaac |
+| Crear vercel.json con configuración estática | Daniel |
+| Reemplazar onclick inline por data attributes con event delegation | Isaac |
+| Implementar localStorage para carrito y pedidos | Isaac |
 | Agregar manejo de errores en servicios críticos | Nicolás |
-| Verificar que los 33 tests pasan con `npm test` | Daniel |
+| Verificar que los 33 tests pasan con npm test | Daniel |
 | Confirmar que el sitio abre con Live Server antes de subir | Isaac |
 
 
